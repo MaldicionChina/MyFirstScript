@@ -1,0 +1,11 @@
+ps aux|
+grep '^YOURUSER'|
+awk '{if(($4>0.0)&&($5>0.0)){ printf "%s /%s /%s /%s /%s \n",$2,$4,$5,$9,$11} }'|
+awk -F'/' 'BEGIN{print "PDI\t%CPU\t%MEM\tRUNNING-TIME(m)~\tPROGRAM"};{printf"%s\t%s\t%s\t\t%s\t\t%s\n",$1,$2,$3,$4,$(NF)}'
+
+falta que muestre el tiempo que lleva activa el programa, 
+funciona con esto pero awk no lo puede interpretar, queda pendiente
+
+echo $(( ((`date -d now +%s`)-(`date -d HERESTARTIME +%s`) )/60 )) 
+
+Ex: echo $(( ((`date -d now +%s`)-(`date -d 15:02 +%s`) )/60 )) // imprime los minutos
